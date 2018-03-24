@@ -31,6 +31,7 @@ except ImportError: import json
 from . import pronsole
 from . import printcore
 from printrun.spoolmanager import spoolmanager_gui
+from printrun.vibration_calibrator import vibration_calibrator_gui
 
 from .utils import install_locale, setup_logging, dosify, \
     iconfile, configfile, format_time, format_duration, \
@@ -766,6 +767,10 @@ class PronterWindow(MainWindow, pronsole.pronsole):
                   self.show_spool_manager,
                   m.Append(-1, _("Spool Manager"),
                            _(" Manage different spools of filament")))
+        self.Bind(wx.EVT_MENU,
+                  self.calibrate_vibration,
+                  m.Append(-1, _("Vibration Calibrator"),
+                           _("Calibrate vibration by adjusting acceleration and jerk")))
         self.menustrip.Append(m, _("&Tools"))
 
         # Advanced Menu
@@ -835,6 +840,9 @@ class PronterWindow(MainWindow, pronsole.pronsole):
     def show_spool_manager(self, event):
         """Show Spool Manager Window"""
         spoolmanager_gui.SpoolManagerMainWindow(self, self.spool_manager).Show()
+
+    def calibrate_vibration(self, event):
+        vibration_calibrator_gui.VibrationCalibratorMainWindow(self, self.vibration_calibrator).Show()
 
     def about(self, event):
         """Show about dialog"""

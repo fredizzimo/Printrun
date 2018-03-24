@@ -43,6 +43,7 @@ from .power import powerset_print_start, powerset_print_stop
 from printrun import gcoder
 from .rpc import ProntRPC
 from printrun.spoolmanager import spoolmanager
+from printrun.vibration_calibrator import vibration_calibrator
 
 if os.name == "nt":
     try:
@@ -167,6 +168,7 @@ class pronsole(cmd.Cmd):
                            "macro": "%(bold)s..>%(normal)s ",
                            "online": "%(bold)s%(green)s%(port)s%(white)s %(extruder_temp_fancy)s%(progress_fancy)s>%(normal)s "}
         self.spool_manager = spoolmanager.SpoolManager(self)
+        self.vibration_calibrator = vibration_calibrator.VibrationCalibrator(self)
         self.current_tool = 0   # Keep track of the extruder being used
         self.cache_dir = os.path.join(user_cache_dir("Printrun"))
         self.history_file = os.path.join(self.cache_dir,"history")
