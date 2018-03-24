@@ -1,4 +1,5 @@
 *.pyc
+*.pyd
 .pronsolerc
 *.swp
 *.bak
